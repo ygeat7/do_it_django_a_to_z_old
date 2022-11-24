@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="ko">
+<<<<<<< HEAD
 
 <head>
 
@@ -222,3 +223,20 @@
 </body>
 
 </html>
+=======
+<head>
+    <meta charset="UTF-8">
+    <title>{{ post.title }} - Blog</title>
+</head>
+<body>
+<nav>
+    <a href="/blog/">Blog</a>
+</nav>
+<h1>{{ post.title }}</h1>
+<h4>{{ post.created_at }}</h4>
+<p>{{ post.content }}</p>
+<hr/>
+<h3>여기 댓글이 들어올 수 있겠죠?</h3>
+</body>
+</html>
+>>>>>>> fa9229c30a9145f714a4997bc231bdabb814b317

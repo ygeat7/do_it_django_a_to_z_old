@@ -130,4 +130,7 @@ dmypy.json
 
 .idea/
 .migrations.
+<<<<<<< HEAD
 _media/
+=======
+>>>>>>> fa9229c30a9145f714a4997bc231bdabb814b317
