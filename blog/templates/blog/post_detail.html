@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="ko">
-<<<<<<< HEAD
 
 <head>
 
@@ -75,7 +74,11 @@
         <hr>
 
         <!-- Preview Image -->
-        <img class="img-fluid rounded" src="{{ post.head_image.url }}" alt="">
+        {% if post.head_image %}
+          <img class="img-fluid rounded" src="{{ post.head_image.url }}" alt="{{ post.title }} head_image">
+        {% else %}
+          <img class="img-fluid rounded" src="https://picsum.photos/seed/{{ post.id }}/800/200" alt="random_image">
+        {% endif %}
 
         <hr>
 
@@ -223,20 +226,3 @@
 </body>
 
 </html>
-=======
-<head>
-    <meta charset="UTF-8">
-    <title>{{ post.title }} - Blog</title>
-</head>
-<body>
-<nav>
-    <a href="/blog/">Blog</a>
-</nav>
-<h1>{{ post.title }}</h1>
-<h4>{{ post.created_at }}</h4>
-<p>{{ post.content }}</p>
-<hr/>
-<h3>여기 댓글이 들어올 수 있겠죠?</h3>
-</body>
-</html>
->>>>>>> fa9229c30a9145f714a4997bc231bdabb814b317

@@ -4,11 +4,7 @@
 
 <head>
     <title>Blog</title>
-<<<<<<< HEAD
     <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}">
-=======
-    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap.min.css' %}">
->>>>>>> fa9229c30a9145f714a4997bc231bdabb814b317
 
     <script src="https://kit.fontawesome.com/726bbd6862.js" crossorigin="anonymous"></script>
 </head>
@@ -90,11 +86,11 @@
                 {% for p in post_list %}
                 <!-- Blog Post -->
                 <div class="card mb-4">
-<<<<<<< HEAD
-                    <img class="card-img-top" src="{{ p.head_image.url }}" alt="Card image cap">
-=======
-                    <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
->>>>>>> fa9229c30a9145f714a4997bc231bdabb814b317
+                    {% if p.head_image %}
+                        <img class="card-img-top" src="{{ p.head_image.url }}" alt="{{ p }} head image">
+                    {% else %}
+                        <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random image">
+                    {% endif %}
                     <div class="card-body">
                         <h2 class="card-title">{{ p.title }}</h2>
                         <p class="card-text">{{ p.content }}</p>
@@ -172,10 +168,7 @@
     </div>
 
     <!-- Footer -->
-<<<<<<< HEAD
     <!-- Footer -->
-=======
->>>>>>> fa9229c30a9145f714a4997bc231bdabb814b317
     <footer class="py-5 bg-dark">
         <div class="container">
             <p class="m-0 text-center text-white">
