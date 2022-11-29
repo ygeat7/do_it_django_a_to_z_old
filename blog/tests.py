@@ -79,4 +79,4 @@ class TestView(TestCase):
         # 아직 작성 불가
 
         # 2.6 첫 번째 포스트의 내용(content)이 포스트 영역에 있다.
-        self.assertIn(post_001.contnet, post_area.text)
+        self.assertIn(post_001.content, post_area.text)
