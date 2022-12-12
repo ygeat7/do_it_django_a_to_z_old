@@ -16,7 +16,7 @@ class TestView(TestCase):
         self.category_music = Category.objects.create(name='music', slug='music')
 
         self.tag_python_kor = Tag.objects.create(name='파이썬 공부', slug='파이썬-공부')
-        self.tag_python = Tag.objects.create(name='pyhton', slug='python')
+        self.tag_python = Tag.objects.create(name='python', slug='python')
         self.tag_hello = Tag.objects.create(name='hello', slug='hello')
 
         self.post_001 = Post.objects.create(
@@ -189,17 +189,18 @@ class TestView(TestCase):
         self.assertNotIn(self.post_003.title, main_area.text)
 
     def test_create_post(self):
-        # 로그인하지 않으면 status code가 200이면 안 된다!
+        # 로그인 하지 않으면 status code가 200이면 안된다!
         response = self.client.get('/blog/create_post/')
         self.assertNotEqual(response.status_code, 200)
 
-        # staff가 아닌 trump가 로그인을 한다.
+        # staff가 아닌 trum가 로그인을 한다.
         self.client.login(username='trump', password='somepassword')
         response = self.client.get('/blog/create_post/')
         self.assertNotEqual(response.status_code, 200)
 
-        # staff인 obama로 로그인한다.
+        # staff인 obama로 로그인 한다.
         self.client.login(username='obama', password='somepassword')
+
         response = self.client.get('/blog/create_post/')
         self.assertEqual(response.status_code, 200)
         soup = BeautifulSoup(response.content, 'html.parser')
@@ -208,17 +209,25 @@ class TestView(TestCase):
         main_area = soup.find('div', id='main-area')
         self.assertIn('Create New Post', main_area.text)
 
+        tag_str_input = main_area.find('input', id='id_tags_str')
+        self.assertTrue(tag_str_input)
+
         self.client.post(
             '/blog/create_post/',
             {
                 'title': 'Post Form 만들기',
                 'content': "Post Form 페이지를 만듭시다.",
+                'tags_str': 'new tag; 한글 태그, python'
             }
         )
-        self.assertEqual(Post.objects.count(), 4)
         last_post = Post.objects.last()
         self.assertEqual(last_post.title, "Post Form 만들기")
         self.assertEqual(last_post.author.username, 'obama')
+
+        self.assertEqual(last_post.tags.count(), 3)
+        self.assertTrue(Tag.objects.get(name='new tag'))
+        self.assertTrue(Tag.objects.get(name='한글 태그'))
+        self.assertEqual(Tag.objects.count(), 5)
 
     def test_upadate_post(self):
         update_post_url = f'/blog/update_post/{self.post_003.pk}/'
